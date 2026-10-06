@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: "Anton", Impact, sans-serif;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", sans-serif;
+  --color-blaze: var(--blaze);
+  --color-sun: var(--sun);
+  --color-ink: var(--ink);
+  --color-foreground: var(--foreground);
+}
+
+:root {
+  --blaze: oklch(0.6 0.235 30);
+  --sun: oklch(0.9 0.18 98);
+  --ink: oklch(0.14 0.01 270);
+  --foreground: oklch(0.97 0.01 90);
+}
+
+body { margin: 0; background: var(--ink); color: var(--foreground); font-family: var(--font-sans); }
+
+/* Reveal overlay */
+.sr-root {
+  --sr-ink: oklch(0.14 0.01 270);
+  --sr-accent: oklch(0.6 0.235 30);
+  --sr-star: oklch(0.9 0.18 98);
+  --sr-font: "Anton", Impact, sans-serif;
+  position: relative;
+  min-height: 100svh;
+  background: var(--sr-ink);
+}
+.sr-content { position: relative; z-index: 0; }
+.sr-overlay {
+  position: fixed; inset: 0; z-index: 50;
+  background: var(--sr-ink); pointer-events: none; overflow: hidden;
+}
+.sr-band {
+  position: absolute; inset: 0; margin: auto;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; background: var(--sr-accent);
+}
+.sr-title {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(3.5rem, 17vw, 15rem); padding: 0 4vw;
+  font-family: var(--sr-font); font-size: clamp(2.5rem, 9.5vw, 10.5rem);
+  line-height: 1; white-space: nowrap; color: var(--sr-star);
+}
+.sr-mask { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.sr-mask > span { display: inline-block; }
+.sr-pad { padding-bottom: 0.25rem; }
+.sr-star-wrap {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.sr-star {
+  width: 150vmax; height: 150vmax; flex-shrink: 0;
+  background: var(--sr-star); will-change: transform;
+}
+@media (max-width: 640px) { .sr-star { width: 170vw; height: 170vw; } }
+.sr-sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+.sr-lock { overflow: hidden; }
