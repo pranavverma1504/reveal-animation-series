@@ -1,0 +1,108 @@
+@font-face { font-family: "Archivo Black"; font-display: swap; src: url("./assets/archivo-black.ttf"); }
+
+body { margin: 0; }
+
+:root {
+  --reveal-bg: oklch(0 0 0);
+  --reveal-bg-final: oklch(1 0 0);
+  --reveal-accent: oklch(0.58 0.24 28);
+}
+
+html, body { overflow-x: hidden; }
+
+.reveal {
+  --h: min(44vh, 120vw);
+  --w: calc(var(--h) * 0.69);
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--reveal-bg);
+  font-family: "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+}
+
+.reveal-wipe {
+  position: absolute;
+  inset: 0;
+  background: var(--reveal-bg-final);
+  transform: translateY(100%);
+  animation: reveal-wipe 0.8s 5.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  will-change: transform;
+}
+
+.reveal-panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--w);
+  height: var(--h);
+  margin: calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(calc(var(--o) * var(--h) * 0.62)) scale(0.8);
+  animation:
+    reveal-in 0.7s calc(0.3s + var(--i) * 0.18s) ease-out forwards,
+    reveal-dense 1s 2.2s cubic-bezier(0.76, 0, 0.24, 1) forwards,
+    reveal-out 0.45s calc(3.4s + var(--k) * 0.12s) cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  will-change: transform, opacity, clip-path;
+}
+.reveal-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+  display: block;
+  user-select: none;
+}
+.reveal-panel--main {
+  z-index: 1;
+  animation:
+    reveal-in 0.7s 0.66s ease-out forwards,
+    reveal-dense 1s 2.2s cubic-bezier(0.76, 0, 0.24, 1) forwards,
+    reveal-main 0.8s 3.5s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.reveal-word {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin: 0;
+  text-align: center;
+  color: var(--reveal-accent);
+  font-size: clamp(3rem, 14vw, 13rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  z-index: 2;
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(-30%);
+  animation: reveal-word 0.8s 4.3s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes reveal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes reveal-dense {
+  from { transform: translateX(calc(var(--o) * var(--h) * 0.62)) scale(0.8); }
+  to { transform: translateX(calc(var(--o) * var(--w) * 0.4)) scale(0.38); }
+}
+@keyframes reveal-out {
+  from { clip-path: inset(0 0 0 0); }
+  to { clip-path: inset(0 0 100% 0); }
+}
+@keyframes reveal-main {
+  from { transform: translateX(0) scale(0.38); }
+  to { transform: translateX(0) scale(1); }
+}
+@keyframes reveal-word {
+  from { clip-path: inset(0 0 100% 0); transform: translateY(-20%); }
+  to { clip-path: inset(-10% 0 -10% 0); transform: translateY(-50%); }
+}
+@keyframes reveal-wipe {
+  to { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal *, .reveal { animation-duration: 0.01s !important; animation-delay: 0s !important; }
+}
