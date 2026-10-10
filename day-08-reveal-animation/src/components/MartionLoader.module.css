@@ -1,0 +1,183 @@
+.loader {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  background: var(--martion-ink);
+  color: var(--martion-paper);
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--martion-ink);
+}
+
+.grid::after {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      transparent calc(33.333% - 0.5px),
+      var(--martion-grid-line) calc(33.333% - 0.5px),
+      var(--martion-grid-line) calc(33.333% + 0.5px),
+      transparent calc(33.333% + 0.5px)
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(66.667% - 0.5px),
+      var(--martion-grid-line) calc(66.667% - 0.5px),
+      var(--martion-grid-line) calc(66.667% + 0.5px),
+      transparent calc(66.667% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(33.333% - 0.5px),
+      var(--martion-grid-line) calc(33.333% - 0.5px),
+      var(--martion-grid-line) calc(33.333% + 0.5px),
+      transparent calc(33.333% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(66.667% - 0.5px),
+      var(--martion-grid-line) calc(66.667% - 0.5px),
+      var(--martion-grid-line) calc(66.667% + 0.5px),
+      transparent calc(66.667% + 0.5px)
+    );
+  content: "";
+  pointer-events: none;
+}
+
+.tile {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--martion-red);
+  isolation: isolate;
+}
+
+.tile::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: var(--martion-tint);
+  content: "";
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.tile:nth-child(2)::after,
+.tile:nth-child(4)::after,
+.tile:nth-child(9)::after {
+  background: var(--martion-tint-strong);
+}
+
+.tileImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.12) saturate(0.82);
+}
+
+.artwork {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+}
+
+.shutter {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  background: var(--martion-red);
+  clip-path: inset(0% 0% 0% 0%);
+  pointer-events: none;
+}
+
+.centerTile {
+  display: grid;
+  place-items: center;
+  background: var(--martion-red);
+}
+
+.centerTile::after {
+  display: none;
+}
+
+.centerBackdrop {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: var(--martion-ink);
+  clip-path: inset(0% 100% 0% 0%);
+}
+
+.wordmark {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  /* Bebas Neue advance widths for M A R T I O N, so the wide M is not clipped. */
+  grid-template-columns: 0.538em 0.401em 0.403em 0.364em 0.192em 0.4em 0.427em;
+  width: 2.725em;
+  height: 0.96em;
+  margin: 0;
+  font-family: var(--font-nazar), sans-serif;
+  font-size: clamp(2.142857rem, 6.428571vw, 7.142857rem);
+  font-weight: 400;
+  line-height: 0.84;
+  letter-spacing: 0.01em;
+  text-indent: 0;
+}
+
+.reelColumn {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 0.96em;
+  overflow: hidden;
+}
+
+.reelTrack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.reelGlyph {
+  display: grid;
+  flex: 0 0 0.96em;
+  width: 100%;
+  height: 0.96em;
+  place-items: center;
+  line-height: 0.84;
+}
+
+@media (max-width: 700px) {
+  .wordmark {
+    font-size: clamp(1.714286rem, 9.285714vw, 3.428571rem);
+  }
+}

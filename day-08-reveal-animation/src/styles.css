@@ -1,0 +1,31 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@font-face { font-family: "Bebas Neue"; font-weight: 400; font-style: normal; font-display: swap; src: url("/fonts/bebas-neue.ttf") format("truetype"); }
+
+:root {
+  --martion-ink: oklch(0.1285578042 0.0000000048 89.8755627853);
+  --martion-paper: oklch(0.8982828499 0.0293864045 89.5828112817);
+  --martion-red: oklch(0.4126949082 0.1571159610 27.7012864834);
+  --martion-tile-1: oklch(0.9064606516 0.0235846692 82.1180056639);
+  --martion-tile-2: oklch(0.7983723735 0.0000000298 89.8755627759);
+  --martion-tile-3: oklch(0.1149182756 0.0000000043 89.8755632080);
+  --martion-tile-4: oklch(0.9104261178 0.0363782224 96.7275322900);
+  --martion-tile-5: oklch(0.9357132459 0.0119946564 79.7832963596);
+  --martion-tile-6: oklch(0.3106049722 0.0207276423 171.0328291161);
+  --martion-tile-7: oklch(0.9309991350 0.0000000347 89.8755630843);
+  --martion-tile-8: oklch(0.9491192544 0.0000000354 89.8755627142);
+  --martion-grid-line: oklch(0.8982828499 0.0293864045 89.5828112817 / 22%);
+  --martion-tint: oklch(0.4126949082 0.1571159610 27.7012864834 / 10%);
+  --martion-tint-strong: oklch(0.4126949082 0.1571159610 27.7012864834 / 32%);
+  --font-nazar: "Bebas Neue";
+  --background: var(--martion-paper);
+  --foreground: var(--martion-red);
+  --primary: var(--martion-red);
+  --primary-foreground: var(--martion-paper);
+  --border: var(--martion-ink);
+}
+@theme inline { --color-background: var(--background); --color-foreground: var(--foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground); --color-border: var(--border); }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--background); color: var(--foreground); font-family: Arial, sans-serif; }
